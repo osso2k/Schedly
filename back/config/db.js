@@ -43,3 +43,17 @@ export const userTable = async () => {
         console.log("ERR in creating user table", error.message)
     }
 }
+
+export const tasksTable = async () => {
+    try {
+        await pool.query(`CREATE TABLE IF NOT EXISTS schedule (
+            owner TEXT,
+            preferred_time NUMBER,
+            timer NUMBER,
+            status TEXT,
+            )`)
+        console.log("schedule table exists!")
+    } catch (error) {
+        console.log(error.message)
+    }
+}
