@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import SignupPage from './pages/SignupPage.tsx'
 import LoginPage from './pages/LoginPage.tsx'
 import { Toaster } from 'react-hot-toast'
+import { ProtectedRoute1, ProtectedRoute2 } from './components/ProtectedRoute.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -13,9 +14,9 @@ createRoot(document.getElementById('root')!).render(
       <Toaster/>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<App/>} />
-          <Route path='/signup' element={<SignupPage/>} />
-          <Route path='/login' element={<LoginPage/>} />
+          <Route path='/' element={<ProtectedRoute1><App/></ProtectedRoute1>} />
+          <Route path='/signup' element={<ProtectedRoute2><SignupPage/></ProtectedRoute2>} />
+          <Route path='/login' element={<ProtectedRoute2><LoginPage/></ProtectedRoute2>} />
         </Routes>
       </BrowserRouter>
 
