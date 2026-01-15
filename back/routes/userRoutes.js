@@ -3,8 +3,8 @@ import { getUser, login, signup } from "../controllers/authcontroller.js";
 
 const userRouter = Router()
 
-userRouter.get("/auth/user", getUser)
-userRouter.post("/auth/signup", signup)
-userRouter.post("/auth/login", login)
+userRouter.get("/user", getUser)
+userRouter.post("/signup", signup)
+userRouter.post("/login", login)
 
 export default userRouter

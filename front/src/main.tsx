@@ -9,7 +9,7 @@ import { Toaster } from 'react-hot-toast'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <div>
+    <div className='flex min-h-screen w-full bg-zinc-700 text-white text-2xl'>
       <Toaster/>
       <BrowserRouter>
         <Routes>

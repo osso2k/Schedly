@@ -19,11 +19,11 @@ await uuidGen()
 await userTable()
 await tasksTable()
 
-app.get("/", protectedRoutees, (req, res) => {
+app.get("/", (req, res) => {
     res.json({ message: "Wassup!" })
 })
-app.use("/api", userRouter)
-app.use("/api", protectedRoutees, taskRouter)
+app.use("/api/auth", userRouter)
+app.use("/api/task", protectedRoutees, taskRouter)
 app.listen(PORT, () => {
     console.log(`App is running on http://localhost:${PORT}`)
 })

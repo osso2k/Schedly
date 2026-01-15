@@ -29,10 +29,10 @@ export const signup = async (req, res) => {
         const salt = await bcrypt.genSalt(7)
         const hashedPassword = await bcrypt.hash(password, salt)
 
-        const user = await pool.query(`INSERT INTO users (username,email,hashed_password) VALUES ($1, $2, $3) RETURNING id`, [username, email, hashedPassword])
+        const user = await pool.query(`INSERT INTO users (username,email,hashed_password) VALUES ($1, $2, $3) RETURNING id,email,username`, [username, email, hashedPassword])
 
         const token = await generateToken(user.rows[0].id)
-        res.status(202).json({ message: "User created ", token, userId: user.rows[0].id })
+        res.status(202).json({ message: "User created ", token, user: { id: user.rows[0].idid, username: user.rows[0].username, email: user.rows[0].email } })
 
     } catch (error) {
         res.json({ message: "Err in signing up.", err: error.message })
@@ -55,7 +55,7 @@ export const login = async (req, res) => {
             return res.json({ message: "Wrong info" })
         }
         const token = await generateToken(user.rows[0].id)
-        res.status(202).json({ message: "Logged in", token })
+        res.status(202).json({ message: "Logged in", token, user: { id: user.rows[0].id, username: user.rows[0].username, email: user.rows[0].email } })
 
     } catch (error) {
         res.json({ message: "Err in logging in. ", err: error.message })

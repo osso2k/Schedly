@@ -11,10 +11,14 @@ const App = () => {
     }
     getData()
   },[])
+  const logout=()=>{
+    localStorage.removeItem("token")
+  }
   return (
     <div>
       <h1>Schedly</h1>
       <p>{data}</p>
+      <button onClick={logout}>logout</button>
 
     </div>
   )
