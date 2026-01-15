@@ -32,7 +32,7 @@ export const signup = async (req, res) => {
         const user = await pool.query(`INSERT INTO users (username,email,hashed_password) VALUES ($1, $2, $3) RETURNING id`, [username, email, hashedPassword])
 
         const token = await generateToken(user.rows[0].id)
-        res.status(202).json({ message: "User created ", token })
+        res.status(202).json({ message: "User created ", token, userId: user.rows[0].id })
 
     } catch (error) {
         res.json({ message: "Err in signing up.", err: error.message })

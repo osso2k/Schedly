@@ -13,7 +13,7 @@ const App = () => {
   },[])
   return (
     <div>
-      <h1>Homepage</h1>
+      <h1>Schedly</h1>
       <p>{data}</p>
 
     </div>

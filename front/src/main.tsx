@@ -5,10 +5,12 @@ import App from './App.tsx'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import SignupPage from './pages/SignupPage.tsx'
 import LoginPage from './pages/LoginPage.tsx'
+import { Toaster } from 'react-hot-toast'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <div>
+      <Toaster/>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<App/>} />
