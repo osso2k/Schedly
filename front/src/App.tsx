@@ -10,7 +10,7 @@ import CreateTask from "./components/createTask"
 const App = () => {
   
   return (
-   <div className="flex h-screen w-full">
+   <div className="flex font-serif h-screen w-full">
     <CreateTask />
    </div>
   )
