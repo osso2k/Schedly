@@ -8,6 +8,7 @@ import LoginPage from './pages/LoginPage.tsx'
 import { Toaster } from 'react-hot-toast'
 import { ProtectedRoute1, ProtectedRoute2 } from './components/ProtectedRoute.tsx'
 
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <div className='flex min-h-screen w-full bg-[hsl(0,0%,15%)] text-white'>

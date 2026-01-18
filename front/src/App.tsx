@@ -6,12 +6,12 @@ import CreateTask from "./components/createTask"
 
 // import Navbar from "./components/Navbar"
 import { LuArchive } from "react-icons/lu";
-
+import {motion} from 'motion/react'
 
 const App = () => {
   
   return (
-  <div className="flex flex-col min-h-screen w-full">
+  <motion.div initial={{y:5, opacity:0}} animate={{opacity:1, y:0}} transition={{ease:'easeIn' , duration:0.8}} className="flex flex-col w-full">
     <div className="flex flex-col w-full">
       <div className="flex  mt-24 ml-[25%] ">
         <LuArchive className="text-3xl my-auto text-blue-400" />
@@ -21,7 +21,7 @@ const App = () => {
     </div>
     <CreateTask />
 
-  </div>
+  </motion.div>
   )
 }
 
