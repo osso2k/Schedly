@@ -11,7 +11,7 @@ import { ProtectedRoute1, ProtectedRoute2 } from './components/ProtectedRoute.ts
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <div className='flex min-h-screen w-full bg-[hsl(0,0%,15%)] text-white'>
+    <div className='flex min-h-screen w-full bg-amber-50 text-black'>
       <Toaster/>
       <BrowserRouter>
         <Routes>
