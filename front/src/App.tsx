@@ -1,7 +1,7 @@
 
 // import api from '../api/axios.ts';
 
-import CreateTask from "./components/createTask"
+import CreateTask from "./components/CreateTask"
 // import TasksList from "./components/TasksList"
 
 // import Navbar from "./components/Navbar"
@@ -12,7 +12,7 @@ const App = () => {
   
   return (
   <motion.div initial={{y:5, opacity:0}} animate={{opacity:1, y:0}} transition={{ease:'easeIn' , duration:0.8}} className="flex flex-col w-full">
-    <div className="flex flex-col w-full">
+    <div className="flex flex-wrap flex-col w-full">
       <div className="flex  mt-24 ml-[25%] ">
         <LuArchive className="text-3xl my-auto text-blue-400" />
         <h2 className="text-4xl pl-2 font-semibold font-serif">Schedly</h2>

@@ -37,7 +37,7 @@ const CreateTask = () => {
 
     }
   return (
-    <div className="mt-10 w-[50%] mx-auto h-[50%] bg-orange-50 rounded-2xl border">
+    <div className="flex flex-wrap mt-10 w-[50%] mx-auto h-[50%] bg-orange-50 rounded-2xl border">
       <div className="grid grid-cols-[4fr_2fr] h-full w-full">
         <div className="order-1 flex flex-col gap-2 w-full">
         <div className="flex mt-10 ml-5">
@@ -50,14 +50,23 @@ const CreateTask = () => {
                 <input value={task.title} onChange={handleChange} placeholder="What needs to be done?"  type="text" name="title" className="focus:border-red-500 h-10 my-auto  w-[70%] rounded-lg  bg-white text-black pl-2" />
             </div>
             <div className="flex w-full  mt-2">
-                <label className="my-auto text-amber-900 text-2xl pr-2">Date: </label><input value={task.date} onChange={handleChange}  type="date" placeholder="Date" name="date" className="focus:border focus:border-red-500 h-8 text-sm my-auto  w-[20%] rounded-lg  bg-white text-white pl-2" />
-                <label className=" text-amber-900 text-2xl mx-2 my-auto">time: </label><input value={task.time} onChange={handleChange}  type="time" name="time" className="focus:border-red-500 h-8 text-sm my-auto  w-[15%] rounded-lg  bg-white text-black pl-2" />
+                <label className="my-auto text-amber-900 text-2xl pr-2">Date: </label><input value={task.date} onChange={handleChange}  type="date" placeholder="Date" name="date" className="bg-white border rounded-xl px-4 py-2 shadow-sm cursor-pointer w-20" />
+                <label className=" text-amber-900 text-2xl mx-2 my-auto">time: </label><input value={task.time} onChange={handleChange}  type="time" name="time" className="bg-white border rounded-xl px-4 py-2 shadow-sm cursor-pointer w-20" />
             </div>
             <div className="flex w-full">
-                <label className="my-auto text-amber-900 text-2xl pr-2">duration: </label><input value={task.timer ?? ""} onChange={handleChange}  type="number" name="timer" className="focus:border-red-500 h-10 my-auto  w-[35%] rounded-lg  bg-white text-black pl-2" />
+                <label className="my-auto text-amber-900 text-2xl pr-2">duration: </label>
+                <select className="bg-white border rounded-xl px-4 py-2 shadow-sm cursor-pointer">
+                    <option>15 min</option>
+                    <option>30 min</option>
+                    <option>45 min</option>
+                    <option>1 hour</option>
+                    <option>1.5 hours</option>
+                    <option>2 hours</option>
+                </select>
             </div>
 
         </div>
+        <button type="submit" className="px-4 py-2 bg-yellow-50 border flex mx-[25%] mt-2 cursor-pointer text-2xl rounded-xl">Add</button>
         </form>
 
       </div>
