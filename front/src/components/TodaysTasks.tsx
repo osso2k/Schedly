@@ -24,7 +24,7 @@ const TasksList = () => {
   return (
     <div className="flex flex-col w-full mt-6">
       <h1 className="mx-auto font-serif text-xl font-semibold">--Today--</h1>
-      <div className="grid grid-cols-3">
+      <div className="grid grid-cols-3 w-full">
         {tasks.length > 0 ? (
           tasks.filter(task => task.day === dayIndex).length > 0 ? (
             tasks
@@ -42,10 +42,10 @@ const TasksList = () => {
                 </div>
               ))
           ) : (
-            <p className="w-full max-auto">All clear!</p>
+            <p className="w-full mx-auto">All clear!</p>
           )
         ) : (
-           <p className="w-full max-auto">All clear!</p>
+           <p className="w-full mx-auto">All clear!</p>
         )}
       </div>
       <div className="flex mt-4 mx-20">

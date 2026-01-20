@@ -2,7 +2,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { GrFormAdd } from "react-icons/gr";
 import api from "../../api/axios";
-import TasksList from "./TasksList";
+import TodaysTasks from "./TodaysTasks";
 
 interface TaskData {
     title:string;
@@ -82,7 +82,7 @@ const CreateTask = () => {
                 <h3 className=" text-center text-2xl font-semibold font-serif">BE EFFICIENT!</h3>
                 <p className="text-xs text-zinc-600 font-mono text-center">Always decompose into simpler tasks.</p>
             </div>
-            <TasksList/>
+            <TodaysTasks/>
           
         </div>
       </div>
