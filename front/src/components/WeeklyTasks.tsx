@@ -86,7 +86,7 @@ const WeeklyTasks = () => {
                         {task.title}
                       </p>
                       <p className="text-xs text-zinc-600">
-                        {task.time}
+                        {new Date(`1970-01-01T${task.time}`).toLocaleTimeString([],{hour:'2-digit',minute:"2-digit"})}
                       </p>
                     </div>
 
