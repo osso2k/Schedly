@@ -1,6 +1,6 @@
 import api from "../../api/axios";
 import {useState, useEffect} from "react"
-
+import { motion } from "motion/react"; 
 interface Task {
   id: string | number;
   title: string;
@@ -29,11 +29,11 @@ const WeeklyTasks = () => {
   return (
    <div className="flex flex-col mt-8 mx-auto max-h-full w-[95%] sm:w-[90%] md:w-[80%] lg:w-[70%] xl:w-[60%] shadow">
     <div className="mx-auto">
-      <h1 className="font-normal">Weekly Overview</h1>
-      <div className="flex">
-      <h2 className="font-bold font-serif mr-2">{days[day]}</h2>
-      <select onChange={handleChange} className="pl-2 border bg-white">
-        <option value="">-</option>
+      <h1 className="font-serif font-semibold text-2xl text-center">Weekly Overview</h1>
+      <div className="flex mt-2">
+      <h2 className="font-bold tetxt-xlfont-serif mr-2">{days[day]}</h2>
+      <select onChange={handleChange} name="day" className="pl-2 border bg-white">
+        <option value={dayIndex}>-</option>
         <option value="0">Sun</option>
         <option value="1">Mon</option>
         <option value="2">Tue</option>
@@ -42,6 +42,16 @@ const WeeklyTasks = () => {
         <option value="5">Fri</option>
         <option value="6">Sat</option>
       </select>
+    </div>
+    <div className="grid gap-2 grid-cols-3 sm:grid-cols-4 md:grid-cols-5 w-full mt-4 my-2">
+      {tasks.filter(task => task.day === day).map((task)=>(
+        <motion.div initial={{y:2 , opacity:0}} animate={{y:0 , opacity:1}} transition={{duration:1, ease:"easeIn"}} className="flex flex-col shadow-lg pl-2 rounded-lg border max-w-fit " key={task.id}>
+          <h2 className="mt-2 w-full font-serif text-[16px] sm:text-[18px] md:text-xl font-semibold">{task.title}</h2>
+          <div className="flex flex-wrap mt-2"><p className="font-semibold font-sans mt-3">{task.time.split(":")[0]}:{task.time.split(":")[1]}</p></div>
+          <div className="flex flex-wrap w-full "><p className="text-xs sm:text-[13px] md:text-[15px] font-semibold text-amber-900">status: </p><p className="font-semibold font-serif text-xs sm:text-[13px] md:text-[15px]">{task.status}</p></div>
+          <div className="flex flex-wrap w-full mb-3"><p className="text-xs sm:text-[13px] md:text-[15px] font-semibold text-amber-900">duration: </p><p className="font-semibold font-sans text-xs sm:text-[13px] md:text-[15px]">{task.timer || "-"}</p></div>
+        </motion.div>
+      ))}
     </div>
     </div>
    </div>
