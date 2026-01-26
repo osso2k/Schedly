@@ -24,6 +24,18 @@ export const getTasks = async (req, res) => {
         res.json({ message: "ERR in fetching tasks", err: error.message })
     }
 }
+export const getFourTasks = async (req,res) =>{
+    try {
+        const userId = req.user.id
+        if(userId) {
+            const tasks = await pool.query(`SELECT * FROM tasks WHERE (user_id =$1) ORDER BY day,time ASC LIMIT 4;`,[userId])
+            res.status(202).json({tasks:tasks.rows})    
+        }
+
+    } catch (error) {
+        
+    }
+}
 export const createTask = async (req, res) => {
     try {
         const { title, timer, day, time } = req.body

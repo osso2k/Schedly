@@ -1,112 +1,50 @@
-import { useEffect, useState } from "react"
-import api from "../../api/axios.ts"
-import toast from "react-hot-toast"
-import { Trash2 } from "lucide-react"
-import {motion} from 'motion/react'
+import api from "../../api/axios";
+import {useState, useEffect} from "react"
+
 interface Task {
-  id: string
-  title: string
-  day: number
-  time: string
-  status: string
-  timer?: number
+  id: string | number;
+  title: string;
+  day: number;
+  time: string;
+  status: string;
+  timer?: number;
 }
-
 const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
-
 const WeeklyTasks = () => {
   const [tasks, setTasks] = useState<Task[]>([])
-  const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    const getTasks = async () => {
-      try {
-        const response = await api.get("/api/task/tasks")
-        setTasks(response.data.tasks)
-      } catch (err) {
-        toast.error("Failed to load tasks")
-        console.log((err as Error).message)
-      } finally {
-        setLoading(false)
-      }
+  const dayIndex = new Date().getDay()
+  const [day,setDay] = useState<number>(dayIndex)
+  
+  useEffect(()=>{
+    const getTasks = async ()=>{
+      const response = await api.get("/api/task/tasks")
+      setTasks(response.data.tasks)
     }
-
     getTasks()
-  }, [tasks])
-
-  const deleteTask = async (id: string) => {
-    try {
-      await api.delete(`/api/task/deleteTask/${id}`)
-
-      setTasks(prev => prev.filter(task => task.id !== id))
-
-      toast.success("Task deleted")
-    } catch (err) {
-      toast.error("Failed to delete task")
-      console.log((err as Error).message)
-    }
+  },[tasks])
+  const handleChange = (e:React.ChangeEvent<HTMLSelectElement>)=>{
+    setDay(Number(e.target.value))
   }
-
-  if (loading) {
-    return (
-      <p className="text-center mt-20 text-xl text-zinc-600">
-        Loading schedule...
-      </p>
-    )
-  }
-
   return (
-    <div className="mx-auto mt-12 mb-4 w-[50%] rounded-2xl shadow-lg p-6">
-
-      <h1 className="text-3xl font-bold text-center text-zinc-800 mb-6">
-        Weekly Overview
-      </h1>
-
-      <div className="grid grid-cols-7 gap-3">
-
-        {days.map((dayName, index) => (
-          <div key={index} className=" rounded-xl p-3 shadow border">
-
-            <h2 className="text-center font-semibold font-serif  mb-3 border-b  border-black">
-              {dayName.slice(0,3)}
-            </h2>
-
-            <div className="flex flex-wrap  flex-col gap-2">
-
-              {tasks
-                .filter(task => task.day === index)
-                .sort((a, b) => a.time.localeCompare(b.time))
-                .map(task => (
-                  <motion.div initial={{opacity:0,y:10}} animate={{opacity:1,y:0}}
-                    key={task.id}
-                    className=" rounded-lg p-2 text-sm shadow-sm flex justify-between items-center group"
-                  >
-                    <div>
-                      <p className="font-semibold text-zinc-800">
-                        {task.title}
-                      </p>
-                      <p className="text-xs text-zinc-600">
-                        {new Date(`1970-01-01T${task.time}`).toLocaleTimeString([],{hour:'2-digit',minute:"2-digit"})}
-                      </p>
-                    </div>
-
-                    <button
-                      onClick={() => deleteTask(task.id)}
-                      className="opacity-0 group-hover:opacity-100 transition-all hover:text-red-500"
-                    >
-                      <Trash2 size={16} />
-                    </button>
-
-                  </motion.div>
-                ))}
-
-            </div>
-
-          </div>
-        ))}
-
-      </div>
+   <div className="flex flex-col mt-8 mx-auto max-h-full w-[95%] sm:w-[90%] md:w-[80%] lg:w-[70%] xl:w-[60%] shadow">
+    <div className="mx-auto">
+      <h1 className="font-normal">Weekly Overview</h1>
+      <div className="flex">
+      <h2 className="font-bold font-serif mr-2">{days[day]}</h2>
+      <select onChange={handleChange} className="pl-2 border bg-white">
+        <option value="">-</option>
+        <option value="0">Sun</option>
+        <option value="1">Mon</option>
+        <option value="2">Tue</option>
+        <option value="3">Wed</option>
+        <option value="4">Thu</option>
+        <option value="5">Fri</option>
+        <option value="6">Sat</option>
+      </select>
     </div>
+    </div>
+   </div>
   )
 }
 

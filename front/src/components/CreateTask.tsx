@@ -33,58 +33,105 @@ const CreateTask = () => {
 
     }
   return (
-    <div className="flex flex-wrap mb-6 w-[50%] mx-auto h-[40%] bg-orange-50 rounded-2xl border">
-      <div className="grid grid-cols-[3fr_3fr] h-full w-full">
-        <div className="order-1 flex flex-col gap-2 w-full">
-        <div className="flex mt-10 ml-5">
-            <GrFormAdd className="text-5xl my-auto text-blue-500" />
-            <h2 className="my-auto text-2xl text-zinc-900 font-semibold border-b border-r pr-1 pb-1 shadow-[3px_6px_12px_rgba(0,0,0,0.09)] ">Add New Task</h2>
+    <div className="mt-8 mb-6 mx-auto w-[95%] sm:w-[90%] md:w-[80%] lg:w-[70%] xl:w-[60%] bg-orange-50 rounded-2xl border shadow-lg">
+      <div className="p-4 sm:p-6 lg:p-8">
+        {/* Header Section */}
+        <div className="flex items-center gap-3 mb-6">
+          <GrFormAdd className="text-3xl sm:text-4xl lg:text-5xl text-blue-500 shrink-0" />
+          <h2 className="text-xl sm:text-2xl text-zinc-900 font-semibold font-serif">
+            Add New Task
+          </h2>
         </div>
-        <form onSubmit={handleSubmit}>
-            <div className="flex flex-col gap-2 ml-3 mt-8 w-full">
-            <div className="flex w-full ">
-                <input value={task.title} onChange={handleChange} placeholder="What needs to be done?"  type="text" name="title" className="focus:border-red-500 h-10 my-auto  w-[70%] rounded-lg  bg-white text-black pl-2" />
-            </div>
-            <div className="flex w-full mt-2">
-                <label className="my-auto text-amber-900 text-2xl pr-2">Day: </label>
-                <select name="day" value={task.day ?? ""} onChange={handleChange} className="bg-white pl-1 py-2 rounded my-auto cursor-pointer border">
-                    <option value="">Select-</option>
-                    <option value="0">Sunday</option>
-                    <option value="1">Monday</option>
-                    <option value="2">Tuesday</option>
-                    <option value="3">Wednesday</option>
-                    <option value="4">Thursday</option>
-                    <option value="5">Friday</option>
-                    <option value="6">Saturday</option>
+
+        <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+
+            <div className="space-y-4">
+              <div>
+                <input 
+                  value={task.title} 
+                  onChange={handleChange} 
+                  placeholder="What needs to be done?"  
+                  type="text" 
+                  name="title" 
+                  className="w-full h-10 sm:h-12 px-4 rounded-lg bg-white text-black border border-gray-200 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 transition-colors"
+                />
+              </div>
+
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-sm font-medium text-amber-900 mb-1">Day</label>
+                  <select 
+                    name="day" 
+                    value={task.day ?? ""} 
+                    onChange={handleChange} 
+                    className="w-full px-3 py-2 text-sm text-zinc-500 rounded-lg bg-white border border-gray-200 cursor-pointer focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
+                  >
+                    <option className="" value="">Select day</option>
+                    <option className="" value="0">Sunday</option>
+                    <option className="" value="1">Monday</option>
+                    <option className="" value="2">Tuesday</option>
+                    <option className="" value="3">Wednesday</option>
+                    <option className="" value="4">Thursday</option>
+                    <option className="" value="5">Friday</option>
+                    <option className="" value="6">Saturday</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-amber-900 mb-1">Time</label>
+                  <input 
+                    value={task.time} 
+                    onChange={handleChange}  
+                    type="time" 
+                    name="time" 
+                    className="w-full px-3 py-2 rounded-lg text-sm text-zinc-500 bg-white border border-gray-200 cursor-pointer focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
+                  />
+                </div>
+              </div>
+
+
+              <div>
+                <label className="block text-sm font-medium text-amber-900 mb-1">Duration</label>
+                <select 
+                  name="timer" 
+                  value={task.timer ?? ""} 
+                  onChange={handleChange} 
+                  className="w-full px-3 text-sm text-zinc-500 py-2 rounded-lg bg-white border border-gray-200 cursor-pointer focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
+                >
+                  <option value="">No duration</option>
+                  <option value="15">15 min</option>
+                  <option value="30">30 min</option>
+                  <option value="45">45 min</option>
+                  <option value="60">1 hour</option>
+                  <option value="90">1.5 hours</option>
+                  <option value="120">2 hours</option>
                 </select>
-                <label className=" text-amber-900 text-2xl mx-2 my-auto">time: </label><input value={task.time} onChange={handleChange}  type="time" name="time" className="bg-white border rounded-xl px-4 py-2 shadow-sm cursor-pointer w-20" />
-            </div>
-            <div className="flex w-full">
-                <label className="my-auto text-amber-900 text-2xl pr-2">duration: </label>
-                <select name="timer" value={task.timer ?? ""} onChange={handleChange} className="bg-white border rounded-xl px-3 py-2 shadow-sm cursor-pointer ">
-                    <option value="">-</option>
-                    <option className="mx-auto" value="15">15 min</option>
-                    <option className="mx-auto" value="30">30 min</option>
-                    <option className="mx-auto" value="45">45 min</option>
-                    <option className="mx-auto" value="60">1 hour</option>
-                    <option className="mx-auto" value="90">1.5 hours</option>
-                    <option className="mx-auto" value="120">2 hours</option>
-                </select>
+              </div>
+
+
+              <button 
+                type="submit" 
+                className="w-full sm:w-auto px-6 sm:px-8 py-2 sm:py-3 bg-stone-400 border border-black hover:bg-stone-600 text-white font-medium rounded-lg cursor-pointer transition-colors focus:outline-none focus:ring-2 focus:ring-blue-300"
+              >
+                Add Task
+              </button>
             </div>
 
-        </div>
-        <button type="submit" className="px-4 py-1 bg-yellow-50 border flex mx-[75%] mt-2 cursor-pointer text-xl rounded-xl">Add</button>
+
+            <div className="lg:border-l lg:border-gray-200 lg:pl-8">
+              <div className="mb-4 pb-3 border-b border-gray-200">
+                <h3 className="text-lg sm:text-xl text-center font-semibold font-serif text-zinc-800">
+                  BE EFFICIENT!
+                </h3>
+                <p className="text-xs sm:text-sm text-zinc-600 font-mono text-center mt-1">
+                  Always decompose into simpler tasks.
+                </p>
+              </div>
+              <TodaysTasks />
+            </div>
+          </div>
         </form>
-
-      </div>
-        <div className="order-2 flex flex-col mt-10 text-black border-l mb-3 pl-4">
-            <div className="border-b pb-2 mx-24">
-                <h3 className=" text-center text-2xl font-semibold font-serif">BE EFFICIENT!</h3>
-                <p className="text-xs text-zinc-600 font-mono text-center">Always decompose into simpler tasks.</p>
-            </div>
-            <TodaysTasks/>
-          
-        </div>
       </div>
     </div>
   )
