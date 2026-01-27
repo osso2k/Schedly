@@ -1,6 +1,9 @@
 import api from "../../api/axios";
 import {useState, useEffect} from "react"
 import { motion } from "motion/react"; 
+import { FaEdit } from "react-icons/fa";
+import EditTask from "./EditTask";
+
 interface Task {
   id: string | number;
   title: string;
@@ -12,6 +15,7 @@ interface Task {
 const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
 const WeeklyTasks = () => {
   const [tasks, setTasks] = useState<Task[]>([])
+  const [isUpdating,setIsUpdating] = useState<boolean>(false)
 
   const dayIndex = new Date().getDay()
   const [day,setDay] = useState<number>(dayIndex)
@@ -26,6 +30,7 @@ const WeeklyTasks = () => {
   const handleChange = (e:React.ChangeEvent<HTMLSelectElement>)=>{
     setDay(Number(e.target.value))
   }
+ 
   return (
    <div className="flex flex-col mt-8 mx-auto max-h-full w-[95%] sm:w-[90%] md:w-[80%] lg:w-[70%] xl:w-[60%] shadow">
       <h1 className="font-serif font-semibold text-2xl text-center mx-auto">Weekly Overview</h1>
@@ -47,13 +52,15 @@ const WeeklyTasks = () => {
       {tasks.filter(task => task.day === day).map((task)=>(
         <motion.div initial={{y:2 , opacity:0}} animate={{y:0 , opacity:1}} transition={{duration:1, ease:"easeIn"}} className="flex flex-wrap flex-col shadow-lg pl-2 rounded-lg border min-w-fit " key={task.id}>
           <h2 className="mt-2 w-full font-serif text-[16px] sm:text-[18px] md:text-xl font-semibold">{task.title}</h2>
-          <div className="flex flex-wrap mt-2 w-full"><p className="font-semibold font-sans mt-3">{task.time.split(":")[0]}:{task.time.split(":")[1]}</p></div>
+          <div className="flex flex-wrap mt-5 w-full"><p className="font-semibold font-sans">{task.time.split(":")[0]}:{task.time.split(":")[1]}</p></div>
           <div className="flex flex-wrap w-full "><p className="text-xs sm:text-[13px] md:text-[15px] font-semibold text-amber-900">status: </p><p className="font-semibold font-serif text-xs sm:text-[13px] md:text-[15px]">{task.status}</p></div>
-          <div className="flex flex-wrap w-full mb-3"><p className="text-xs sm:text-[13px] md:text-[15px] font-semibold text-amber-900">duration: </p><p className="font-semibold font-sans text-xs sm:text-[13px] md:text-[15px]">{task.timer || "-"}</p></div>
+          <div className="flex flex-wrap w-full mb-3"><p className="text-xs sm:text-[13px] md:text-[15px] font-semibold text-amber-900">duration: </p><p className="font-semibold font-sans text-xs sm:text-[13px] md:text-[15px]">{task.timer || "-"}</p><FaEdit onClick={()=>{setIsUpdating(!isUpdating)}} className="ml-26 cursor-pointer text-xl text-amber-800" /></div>
+          
         </motion.div>
       ))}
     </div>
     </div>
+    <EditTask />
    </div>
   )
 }
