@@ -13,25 +13,23 @@ interface Task {
 const TasksList = () => {
   const [tasks,setTasks] = useState<Task[]>([])
 
-  useEffect(()=>{
-    const getTasks = async ()=>{
-      const response = await api.get("/api/task/todaysTasks")
-      setTasks(response.data.tasks)
-    }
-    getTasks()
-  },[tasks])
+    useEffect(() => {
+      const getTasks = async () => {
+        const dayIndex = new Date().getDay();
+        const response = await api.get("/api/task/todaysTasks", { params: { dayIndex } });
+        setTasks(response.data.tasks);
+      };
+      getTasks();
+    }, []);
   const deleteTask = async (id: string | number) => {
     await api.delete(`/api/task/deleteTask/${id}`)
     toast.success("Task deleted!")
   }
-  const dayIndex = new Date().getDay()
 
   return (
     <div className="grid grid-cols-2">
-      {tasks.filter(task => task.day === dayIndex).length > 0 ? (
-        tasks
-          .filter(task => task.day === dayIndex)
-          .map((task) => (
+      {tasks.length > 0 ? (
+        tasks.map((task) => (
             <div key={task.id} className="flex-col max-w-[80%] border rounded-lg mb-1">
                 <h2 className="text-left text-sm font-bold font-serif pb-2 px-3 mt-1 ">{task.title}</h2>  
                 <div className="flex flex-wrap my-1 mx-2">

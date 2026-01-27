@@ -26,14 +26,17 @@ export const getTasks = async (req, res) => {
 }
 export const getFourTasks = async (req,res) =>{
     try {
+        const {dayIndex} = req.query
         const userId = req.user.id
         if(userId) {
-            const tasks = await pool.query(`SELECT * FROM tasks WHERE (user_id =$1) ORDER BY day,time ASC LIMIT 4;`,[userId])
+            const tasks = await pool.query(`SELECT * FROM tasks WHERE (user_id =$1) AND (day=$2) ORDER BY day,time ASC LIMIT 4;`,[userId,dayIndex])
             res.status(202).json({tasks:tasks.rows})    
+        } else {
+            res.status(401).json({ message: "Unauthorized" })
         }
 
     } catch (error) {
-        
+        res.status(500).json({ message: "ERR in fetching tasks", err: error.message })
     }
 }
 export const createTask = async (req, res) => {

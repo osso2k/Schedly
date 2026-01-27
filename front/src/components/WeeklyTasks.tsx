@@ -28,8 +28,7 @@ const WeeklyTasks = () => {
   }
   return (
    <div className="flex flex-col mt-8 mx-auto max-h-full w-[95%] sm:w-[90%] md:w-[80%] lg:w-[70%] xl:w-[60%] shadow">
-    <div className="mx-auto">
-      <h1 className="font-serif font-semibold text-2xl text-center">Weekly Overview</h1>
+      <h1 className="font-serif font-semibold text-2xl text-center mx-auto">Weekly Overview</h1>
       <div className="flex mt-2">
       <h2 className="font-bold text-lg md:text-2xl font-serif mr-2">{days[day]}</h2>
       <select onChange={handleChange} name="day" className="pl-2 border bg-white">
@@ -43,6 +42,7 @@ const WeeklyTasks = () => {
         <option value="6">Sat</option>
       </select>
     </div>
+    <div className="">
     <div className="grid gap-2 grid-cols-3 sm:grid-cols-4 md:grid-cols-5 w-full mt-4 mb-2">
       {tasks.filter(task => task.day === day).map((task)=>(
         <motion.div initial={{y:2 , opacity:0}} animate={{y:0 , opacity:1}} transition={{duration:1, ease:"easeIn"}} className="flex flex-wrap flex-col shadow-lg pl-2 rounded-lg border min-w-fit " key={task.id}>
