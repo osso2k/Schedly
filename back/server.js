@@ -9,19 +9,21 @@ import cors from 'cors';
 dotenv.config()
 
 const app = express()
-const PORT = process.env.APP_PORT || null
+const PORT = process.env.APP_PORT || 5000
 const limiter = rateLimit({
     windowMs: 15 * 50 *1000,
     max:200,
 })
 app.set("trust proxy", 1);
-app.use(limiter)
 app.use(express.json())
 app.use(cors({
     origin:"https://schedly-taupe.vercel.app",
     methods: ["GET", "POST", "PATCH", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true
 }))
+app.options("*", cors());
+app.use(limiter)
 
 await connectDB()
 await uuidGen()
