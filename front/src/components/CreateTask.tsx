@@ -33,7 +33,7 @@ const CreateTask = () => {
 
     }
   return (
-    <div className="mt-8 mb-6 mx-auto w-[95%] sm:w-[90%] md:w-[80%] lg:w-[70%] xl:w-[60%] bg-orange-50 rounded-2xl border shadow-lg">
+    <div className="mt-8 mb-6 mx-auto w-[95%] sm:w-[90%] md:w-[80%] lg:w-[70%] xl:w-[60%] border-t rounded-2xl  shadow-sm">
       <div className="p-4 sm:p-6 lg:p-8">
         <div className="flex items-center gap-3 mb-6">
           <GrFormAdd className="text-3xl sm:text-4xl lg:text-5xl text-blue-500 shrink-0" />
